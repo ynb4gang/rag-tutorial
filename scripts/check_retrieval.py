@@ -1,5 +1,10 @@
 """Проверка retrieval (итерация 5) — понятный вывод."""
 
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 from app.retriever import Retriever
 
 
@@ -16,8 +21,9 @@ def main() -> None:
     print("OK: индекс загружен (vectorizer.pkl + matrix.npz + chunks.jsonl)\n")
 
     queries = [
-        ("ипотека ставка", "слова есть в данных -> score > 0, doc_id=2 (Citibank)"),
-        ("безработица переменные", "слов нет в данных -> score=0, но top-k все равно возвращается"),
+        ("ипотека Citibank закрытие сделки", "должны найтись чанки по ипотеке и Citibank"),
+        ("международный перевод Xoom задержка", "должны найтись чанки по денежному переводу Xoom"),
+        ("как приготовить борщ", "negative-query: score должен быть ниже порога релевантности"),
     ]
 
     for query, hint in queries:
@@ -30,7 +36,7 @@ def main() -> None:
         print()
 
     print("=== Итог ===")
-    print("Если видите 3 результата с полями doc_id / score / text — итерация 5 работает.")
+    print("Если видите результаты с полями doc_id / score / text, а negative-query имеет низкий score — retrieval работает.")
 
 
 if __name__ == "__main__":

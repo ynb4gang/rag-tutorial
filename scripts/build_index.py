@@ -24,7 +24,7 @@ from ingest import run as ingest_run
 
 
 def build_tfidf(texts: list[str]) -> tuple[TfidfVectorizer, scipy.sparse.csr_matrix]:
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(ngram_range=(1, 2), min_df=1, sublinear_tf=True)
     matrix = vectorizer.fit_transform(texts)
     return vectorizer, matrix
 

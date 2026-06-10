@@ -8,9 +8,9 @@ from app.prompts import MIN_SCORE
 from app.retriever import Retriever
 
 DEMO_QUESTIONS = [
-    "Ипотека - закрытие ипотечной сделки",
-    "Какие переменные в датасете про безработицу?",
-    "За какой период данные об инфляции?",
+    "Какие проблемы бывают с ипотекой у Citibank?",
+    "Что известно про задержку международного перевода Xoom?",
+    "Какие жалобы связаны с ошибкой в кредитном отчете Experian?",
     "Как приготовить борщ?",
 ]
 
@@ -50,9 +50,9 @@ def render_sources(sources: list[dict]) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="RAG Tutorial", layout="wide")
-    st.title("RAG Tutorial")
-    st.caption("Учебный RAG: TF-IDF + demo-ответ с источниками")
+    st.set_page_config(page_title="Учебный RAG CFPB", layout="wide")
+    st.title("Учебный RAG CFPB")
+    st.caption("Локальный RAG: CFPB complaint corpus → TF-IDF retrieval → ответ с источниками")
 
     if not index_exists():
         st.error(
